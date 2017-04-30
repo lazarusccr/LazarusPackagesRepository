@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html ng-app="LazarusPackages">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lazarus Packages</title>
+
+    <!-- Angular & Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <!-- Application -->
+    <script src="main.js"></script>
+    <style>
+        .card {
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body ng-controller="PackagesController as pc">
+    <!-- Header -->
+    <nav class="navbar navbar-light bg-faded sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Lazarus Packages</a>
+            <!-- Search and Categories -->
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="text" ng-model="pc.searchText" placeholder="Search">
+                <select class="form-control" ng-model="pc.selectedCategory">
+                    <option value="{{category.toString().toLowerCase()}}" ng-repeat="category in pc.categories">{{category.toString()}}</option>
+                </select>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div>
+                <!-- Package data -->
+                <div class="card" ng-repeat="package in pc.packages" ng-show="pc.show($index)">
+                    <div class="card-block">
+                        <h4 class="card-title">{{package.data.DisplayName}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">{{package.data.Category}}</h6>
+                        <a href="{{package.data.RepositoryFileName}}" class="card-link">Download</a>
+                        <a ng-show="package.data.HomePageURL" href="{{package.data.HomePageURL}}" class="card-link">Home Page</a>
+                    </div>
+                    <!-- Package files -->
+                    <div class="card-block" ng-repeat="files in package.files">
+                        <p ng-show="files.Name"><strong>Package:</strong> {{files.Name}}</p>
+                        <p ng-show="files.Author"><strong>Author:</strong> {{files.Author}}</p>
+                        <p ng-show="files.Description"><strong>Description:</strong> {{files.Description}}</p>
+                        <p ng-show="files.License"><strong>License:</strong> {{files.License | limitTo:200}}{{files.License.length > 200 ? '...' : ''}}</p>
+                        <p ng-show="files.Dependencies"><strong>Dependencies:</strong> {{files.DependenciesAsString}}</p>
+                        <p ng-show="files.VersionAsString"><strong>Version:</strong> {{files.VersionAsString}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
