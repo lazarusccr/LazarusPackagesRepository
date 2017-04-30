@@ -1,6 +1,6 @@
 "use strict";
 (function () {
-    const packages_json = 'http://packages.lazarus-ide.org/packagelist.json';
+    const packages_json = 'packagelist.json';
     let app = angular.module('LazarusPackages', []);
 
     app.controller('PackagesController', ['$http', function ($http) {
