@@ -12,9 +12,13 @@
         crossorigin="anonymous">
     <!-- Application -->
     <script src="main.js"></script>
+    <script src="mark.min.js"></script>
     <style>
         .card {
             margin: 15px;
+        }
+        mark {
+            padding: 0px;
         }
     </style>
 </head>
@@ -26,7 +30,7 @@
             <a class="navbar-brand" href="#">Lazarus Packages</a>
             <!-- Search and Categories -->
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" ng-model="pc.searchText" placeholder="Search">
+                <input class="form-control mr-sm-2" type="text" ng-model="pc.searchText" ng-change="pc.markText()" ng-model-options="{debounce:250}" placeholder="Search">
                 <select class="form-control" ng-model="pc.selectedCategory">
                     <option value="{{category.toString().toLowerCase()}}" ng-repeat="category in pc.categories">{{category.toString()}}</option>
                 </select>
@@ -35,7 +39,7 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div>
+            <div class="context">
                 <!-- Package data -->
                 <div class="card" ng-repeat="package in pc.packages" ng-show="pc.show($index)">
                     <div class="card-block">

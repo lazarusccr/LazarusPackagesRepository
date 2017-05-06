@@ -86,5 +86,11 @@
             }
             return c && d;
         }
+
+        this.markText = () => {
+            var instance = new Mark(document.querySelector(".context"));
+            instance.unmark();
+            instance.mark(this.searchText);
+        }
     }]);
 })();
