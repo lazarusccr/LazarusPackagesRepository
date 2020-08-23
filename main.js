@@ -88,7 +88,7 @@
         }
 
         this.markText = () => {
-            var instance = new Mark(document.querySelector(".context"));
+            var instance = new Mark(document.querySelector(".content"));
             instance.unmark();
             instance.mark(this.searchText);
         }
